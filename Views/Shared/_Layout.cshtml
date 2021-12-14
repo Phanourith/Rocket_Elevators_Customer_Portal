@@ -21,10 +21,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="InterventionRequest">Intervention Request</a>
-                        </li>
-                        <li class="nav-item">
+                        
+                        @if (User.Identity.IsAuthenticated){
+                            <li class="nav-item">
                             <div class="dropdown">
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     My Products
@@ -34,9 +33,15 @@
                                     <a class="dropdown-item" href="#">My Batteries</a>
                                     <a class="dropdown-item" href="#">My Columns</a>
                                     <a class="dropdown-item" href="#">My Elevators</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="InterventionRequest">Intervention Request</a>
+                                    </li>
                                 </div>
                             </div>
                         </li>
+                        }
+                        
+                        
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
