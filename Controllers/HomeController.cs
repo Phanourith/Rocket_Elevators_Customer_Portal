@@ -23,7 +23,13 @@ namespace RocketElevatorsCustomerPortal.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        
+        public IActionResult InterventionRequest()
+        {
+            return View();
+        }
+
+        public IActionResult MyProducts()
         {
             return View();
         }
