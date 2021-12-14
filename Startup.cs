@@ -12,6 +12,7 @@ using RocketElevatorsCustomerPortal.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace RocketElevatorsCustomerPortal
 {
@@ -27,9 +28,14 @@ namespace RocketElevatorsCustomerPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString =  @"server=codeboxx.cq6zrczewpu2.us-east-1.rds.amazonaws.com;userid=codeboxx;password=Codeboxx1!;database=LongNguyenAccount;port=3306";
+            var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(connectionString, serverVersion)
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
+            );
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

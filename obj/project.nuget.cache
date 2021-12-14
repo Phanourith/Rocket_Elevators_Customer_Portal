@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1rzi7ptp+3fnLuiiHcxi7xJemMO+r/JU33D7RTZ3QhpHzO/8EURnY9IS3Eh/kPxqDJlsljKcxMSv88WeaYl8jQ==",
+  "dgSpecHash": "0C+9kaCvv5Mx67fPR7nDaneNJpoKuwwVT7N7p9xBtovMVAK23TTuln2sp0jRNKFlwL0LnrdesWMczKjK/SgQqg==",
   "success": true,
   "projectFilePath": "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj",
   "expectedPackageFiles": [
@@ -35,6 +35,8 @@
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\mysqlconnector\\1.3.13\\mysqlconnector.1.3.13.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\5.0.3\\pomelo.entityframeworkcore.mysql.5.0.3.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",

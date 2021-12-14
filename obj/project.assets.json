@@ -397,6 +397,29 @@
           "lib/netcoreapp3.0/Microsoft.Extensions.Primitives.dll": {}
         }
       },
+      "MySqlConnector/1.3.13": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/MySqlConnector.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/MySqlConnector.dll": {}
+        }
+      },
+      "Pomelo.EntityFrameworkCore.MySql/5.0.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "[5.0.10, 6.0.0)",
+          "Microsoft.Extensions.DependencyInjection": "5.0.2",
+          "MySqlConnector": "1.3.13"
+        },
+        "compile": {
+          "lib/netstandard2.1/Pomelo.EntityFrameworkCore.MySql.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Pomelo.EntityFrameworkCore.MySql.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.4": {
         "type": "package",
         "dependencies": {
@@ -1205,6 +1228,51 @@
         "version.txt"
       ]
     },
+    "MySqlConnector/1.3.13": {
+      "sha512": "o1qsijkFGvTslpuQdcJwG6IvdNOiVL7fRqvFZ0LTg04kfz+IzzwSWj4YwgTe0q0C3p0WqgaDXui5OEx6qgwebg==",
+      "type": "package",
+      "path": "mysqlconnector/1.3.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net45/MySqlConnector.dll",
+        "lib/net45/MySqlConnector.xml",
+        "lib/net461/MySqlConnector.dll",
+        "lib/net461/MySqlConnector.xml",
+        "lib/net471/MySqlConnector.dll",
+        "lib/net471/MySqlConnector.xml",
+        "lib/net5.0/MySqlConnector.dll",
+        "lib/net5.0/MySqlConnector.xml",
+        "lib/netcoreapp2.1/MySqlConnector.dll",
+        "lib/netcoreapp2.1/MySqlConnector.xml",
+        "lib/netcoreapp3.1/MySqlConnector.dll",
+        "lib/netcoreapp3.1/MySqlConnector.xml",
+        "lib/netstandard1.3/MySqlConnector.dll",
+        "lib/netstandard1.3/MySqlConnector.xml",
+        "lib/netstandard2.0/MySqlConnector.dll",
+        "lib/netstandard2.0/MySqlConnector.xml",
+        "lib/netstandard2.1/MySqlConnector.dll",
+        "lib/netstandard2.1/MySqlConnector.xml",
+        "logo.png",
+        "mysqlconnector.1.3.13.nupkg.sha512",
+        "mysqlconnector.nuspec"
+      ]
+    },
+    "Pomelo.EntityFrameworkCore.MySql/5.0.3": {
+      "sha512": "MtIjBlhfSpCbJx3NPFCBUpVlXN/+prd4P4vbGzfIAi8lOGX6SFdde3uBrSgJeSlpt1+oDtU1Tjtr2eC4VuvOhg==",
+      "type": "package",
+      "path": "pomelo.entityframeworkcore.mysql/5.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard2.1/Pomelo.EntityFrameworkCore.MySql.dll",
+        "lib/netstandard2.1/Pomelo.EntityFrameworkCore.MySql.xml",
+        "pomelo.entityframeworkcore.mysql.5.0.3.nupkg.sha512",
+        "pomelo.entityframeworkcore.mysql.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.4": {
       "sha512": "f5U8Sw0lRym8tTraJ2zm6OqcDrcrEVvcKDtYlKSLs3Ox9SerkwkPXiFXb/uiW0g2tJdUw6oBhsxI/l5DoRxXMg==",
       "type": "package",
@@ -1450,7 +1518,8 @@
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.12",
       "Microsoft.AspNetCore.Identity.UI >= 5.0.12",
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.12",
-      "Microsoft.EntityFrameworkCore.Tools >= 5.0.12"
+      "Microsoft.EntityFrameworkCore.Tools >= 5.0.12",
+      "Pomelo.EntityFrameworkCore.MySql >= 5.0.3"
     ]
   },
   "packageFolders": {
@@ -1516,6 +1585,10 @@
           "Microsoft.EntityFrameworkCore.Tools": {
             "target": "Package",
             "version": "[5.0.12, )"
+          },
+          "Pomelo.EntityFrameworkCore.MySql": {
+            "target": "Package",
+            "version": "[5.0.3, )"
           }
         },
         "imports": [

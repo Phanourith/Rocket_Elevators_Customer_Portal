@@ -32,8 +32,7 @@ namespace RocketElevatorsCustomerPortal.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -93,12 +92,10 @@ namespace RocketElevatorsCustomerPortal.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
@@ -116,8 +113,7 @@ namespace RocketElevatorsCustomerPortal.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
