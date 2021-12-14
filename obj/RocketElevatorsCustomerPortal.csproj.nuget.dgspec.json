@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj": {}
+    "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj": {}
   },
   "projects": {
-    "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj": {
+    "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj",
+        "projectUniqueName": "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj",
         "projectName": "RocketElevatorsCustomerPortal",
-        "projectPath": "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "E:\\RocketElevatorsCustomerPortal\\obj\\",
+        "projectPath": "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj",
+        "packagesPath": "C:\\Users\\long\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\long\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -55,6 +49,10 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[5.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
@@ -91,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }
