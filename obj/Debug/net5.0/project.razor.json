@@ -15704,6 +15704,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\domin\\week11\\Rocket_Elevators_Customer_Portal\\Views\\Home\\UpdateProfile.cshtml",
+      "TargetPath": "Views\\Home\\UpdateProfile.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\domin\\week11\\Rocket_Elevators_Customer_Portal\\Views\\Home\\Elevators.cshtml",
       "TargetPath": "Views\\Home\\Elevators.cshtml",
       "FileKind": "mvc"

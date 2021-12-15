@@ -75,13 +75,11 @@ namespace RocketElevatorsCustomerPortal.Controllers
        public async Task<IActionResult> Elevators()
         {
 
-
-
             List<Elevator> ElevatorList = new List<Elevator>();
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("https://domin-rest.azurewebsites.net/api/customers/claudie@cronin.name/columns"))
+                using (var response = await httpClient.GetAsync("https://domin-rest.azurewebsites.net/api/customers/claudie@cronin.name/elevators"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     ElevatorList = JsonConvert.DeserializeObject<List<Elevator>>(apiResponse);
@@ -89,6 +87,45 @@ namespace RocketElevatorsCustomerPortal.Controllers
             }
             return View(ElevatorList);
         }
+
+        public async Task<IActionResult> UpdateProfile()
+        {
+            Customer customer = new Customer();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://domin-rest.azurewebsites.net/api/customers/claudie@cronin.name/info/"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    customer = JsonConvert.DeserializeObject<Customer>(apiResponse);
+                }
+            }
+            return View(customer);
+        }
+
+         [HttpPost]
+        public async Task<IActionResult> UpdateProfile(Customer customer)
+        {
+            Customer receivedCustomer = new Customer();
+            using (var httpClient = new HttpClient())
+            {
+                var content = new MultipartFormDataContent();
+                content.Add(new StringContent(customer.company_name), "company_name");
+                content.Add(new StringContent(customer.company_headquarters_address), "company_headquarters_address");
+                content.Add(new StringContent(customer.full_name_of_the_company_contact), "full_name_of_the_company_contact");
+                content.Add(new StringContent(customer.company_contact_phone), "company_contact_phone");
+                content.Add(new StringContent(customer.email_of_the_company_contact), "email_of_the_company_contact");
+ 
+                using (var response = await httpClient.PutAsync("https://localhost:44324/api/Reservation", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    ViewBag.Result = "Success";
+                    receivedReservation = JsonConvert.DeserializeObject<Reservation>(apiResponse);
+                }
+            }
+            return View(receivedReservation);
+        }
+    }
+}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

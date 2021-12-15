@@ -648,3 +648,4 @@ C:\Users\domin\week11\Rocket_Elevators_Customer_Portal\obj\Debug\net5.0\RocketEl
 C:\Users\domin\week11\Rocket_Elevators_Customer_Portal\obj\Debug\net5.0\ref\RocketElevatorsCustomerPortal.dll
 C:\Users\domin\week11\Rocket_Elevators_Customer_Portal\obj\Debug\net5.0\RocketElevatorsCustomerPortal.pdb
 C:\Users\domin\week11\Rocket_Elevators_Customer_Portal\obj\Debug\net5.0\RocketElevatorsCustomerPortal.genruntimeconfig.cache
+C:\Users\domin\week11\Rocket_Elevators_Customer_Portal\obj\Debug\net5.0\Razor\Views\Home\UpdateProfile.cshtml.g.cs
