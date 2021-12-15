@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj": {}
+    "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj": {
+    "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj",
+        "projectUniqueName": "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj",
         "projectName": "RocketElevatorsCustomerPortal",
-        "projectPath": "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj",
-        "packagesPath": "C:\\Users\\long\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\long\\Rocket_Elevators_Customer_Portal\\obj\\",
+        "projectPath": "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "E:\\RocketElevatorsCustomerPortal\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\long\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -62,6 +68,10 @@
               "target": "Package",
               "version": "[5.0.12, )"
             },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -89,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
