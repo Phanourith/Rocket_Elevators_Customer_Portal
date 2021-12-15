@@ -10,18 +10,20 @@ using Microsoft.Extensions.Logging;
 using RocketElevatorsCustomerPortal.Models;
 using Newtonsoft.Json;
 
-
 namespace RocketElevatorsCustomerPortal.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<IdentityUser> _userManager;
+        
 
         
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -37,14 +39,16 @@ namespace RocketElevatorsCustomerPortal.Controllers
 
         public async Task<IActionResult> Batteries()
         {
-
-
-
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            Console.WriteLine(user);
             List<Battery> BatteryList = new List<Battery>();
+            var email = user.UserName;
+            
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("https://domin-rest.azurewebsites.net/api/customers/claudie@cronin.name/batteries"))
+            
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/{email}/batteries"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     BatteryList = JsonConvert.DeserializeObject<List<Battery>>(apiResponse);
@@ -81,7 +85,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("https://domin-rest.azurewebsites.net/api/customers/claudie@cronin.name/columns"))
+                using (var response = await httpClient.GetAsync("https://domin-rest.azurewebsites.net/api/customers/claudie@cronin.name/elevators"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     ElevatorList = JsonConvert.DeserializeObject<List<Elevator>>(apiResponse);
