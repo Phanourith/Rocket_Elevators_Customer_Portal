@@ -18,7 +18,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+         public IActionResult Index()
         {
             return View();
         }
@@ -29,7 +29,19 @@ namespace RocketElevatorsCustomerPortal.Controllers
             return View();
         }
 
-        public IActionResult MyProducts()
+        public IActionResult Batteries()
+        {
+            return View();
+        }
+
+        
+        public IActionResult Columns()
+        {
+            return View();
+        }
+
+        
+        public IActionResult Elevators()
         {
             return View();
         }

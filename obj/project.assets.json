@@ -7909,25 +7909,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\domin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj",
+      "projectUniqueName": "C:\\Users\\domin\\week11\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj",
       "projectName": "RocketElevatorsCustomerPortal",
-      "projectPath": "E:\\RocketElevatorsCustomerPortal\\RocketElevatorsCustomerPortal.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "E:\\RocketElevatorsCustomerPortal\\obj\\",
+      "projectPath": "C:\\Users\\domin\\week11\\Rocket_Elevators_Customer_Portal\\RocketElevatorsCustomerPortal.csproj",
+      "packagesPath": "C:\\Users\\domin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\domin\\week11\\Rocket_Elevators_Customer_Portal\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\domin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
