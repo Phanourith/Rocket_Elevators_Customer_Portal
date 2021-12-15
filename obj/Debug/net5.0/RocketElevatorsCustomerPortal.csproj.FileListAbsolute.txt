@@ -660,3 +660,4 @@ C:\Users\long\Rocket_Elevators_Customer_Portal\obj\Debug\net5.0\Razor\Views\Home
 C:\Users\long\Rocket_Elevators_Customer_Portal\obj\Debug\net5.0\Razor\Views\Home\Columns.cshtml.g.cs
 C:\Users\long\Rocket_Elevators_Customer_Portal\obj\Debug\net5.0\Razor\Views\Home\Elevators.cshtml.g.cs
 >>>>>>> main
+C:\Users\long\Rocket_Elevators_Customer_Portal\obj\Debug\net5.0\Razor\Views\Home\UpdateProfile.cshtml.g.cs
