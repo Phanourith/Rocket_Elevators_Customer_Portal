@@ -1,0 +1,52 @@
+@model Customer
+@{ Layout = "_Layout";}
+ 
+<h2>Update Profile <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a></h2>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="company_name">Company Name</label>
+        <input class="form-control" asp-for="company_name"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="company_headquarters_address">Address</label>
+        <input class="form-control" asp-for="company_headquarters_address" />
+    </div>
+    <div class="form-group">
+        <label asp-for="full_name_of_the_company_contact">Full Name</label>
+        <input class="form-control" asp-for="full_name_of_the_company_contact" />
+    </div>
+    <div class="form-group">
+        <label asp-for="company_contact_phone">Phone Number</label>
+        <input class="form-control" asp-for="company_contact_phone" />
+    </div>
+     <div class="form-group">
+        <label asp-for="email_of_the_company_contact">Email</label>
+        <input class="form-control" asp-for="email_of_the_company_contact" />
+    </div>
+    <div class="text-center panel-body">
+        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+    </div>
+</form>
+ 
+@if (ViewBag.Result == "Success")
+{
+    <h2>Reservation</h2>
+    <table class="table table-sm table-striped table-bordered m-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Start Location</th>
+                <th>End Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.company_name</td>
+                <td>@Model.company_contact_phone</td>
+                <td>@Model.company_contact_phone</td>
+                <td>@Model.company_contact_phone</td>
+            </tr>
+        </tbody>
+    </table>
+}

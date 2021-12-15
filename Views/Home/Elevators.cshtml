@@ -8,7 +8,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                
+                <th>Elevator Type</th>
+                <th>Serial Number</th>
                 <th>Status</th>
                 <th>Intervention Request</th>
             </tr>
@@ -19,7 +20,8 @@
             <tr>
                 
                 <td>@r.id</td>
-        
+                <td>@r.elevator_type</td>
+                <td>@r.serial_number</td>
                 <td>@r.status.ToUpper()</td>
                 <td>
                     <a asp-action="" asp-route-id="">
