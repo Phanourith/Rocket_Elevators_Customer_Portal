@@ -40,7 +40,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
         public async Task<IActionResult> Batteries()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            Console.WriteLine(user);
+            
             List<Battery> BatteryList = new List<Battery>();
             var email = user.UserName;
             
@@ -61,7 +61,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
         {
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            Console.WriteLine(user);
+            
             List<Battery> BatteryList = new List<Battery>();
             var email = user.UserName;
 
@@ -82,7 +82,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
        public async Task<IActionResult> Elevators()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            Console.WriteLine(user);
+           
             List<Battery> BatteryList = new List<Battery>();
             var email = user.UserName;
 
@@ -100,6 +100,27 @@ namespace RocketElevatorsCustomerPortal.Controllers
             return View(ElevatorList);
         }
 
+        public async Task<IActionResult> UpdateProfile()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
+            Customer customer = new Customer();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/{email}/info/"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    customer = JsonConvert.DeserializeObject<Customer>(apiResponse);
+                }
+            }
+            return View(customer);
+        }
+
+         
+        
+    
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -107,3 +128,4 @@ namespace RocketElevatorsCustomerPortal.Controllers
         }
     }
 }
+
