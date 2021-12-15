@@ -5,6 +5,12 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="alert alert-
+       <strong>Error!</strong> danger">@ViewData.ModelState["Error"].Errors.First().ErrorMessage
+    </div>
+}
 
 <div class="row">
     <div class="col-md-4">
