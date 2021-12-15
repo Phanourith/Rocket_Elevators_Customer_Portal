@@ -60,13 +60,16 @@ namespace RocketElevatorsCustomerPortal.Controllers
         public async Task<IActionResult> Columns()
         {
 
-
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            Console.WriteLine(user);
+            List<Battery> BatteryList = new List<Battery>();
+            var email = user.UserName;
 
             List<Column> ColumnList = new List<Column>();
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("https://domin-rest.azurewebsites.net/api/customers/claudie@cronin.name/columns"))
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/{email}/columns"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     ColumnList = JsonConvert.DeserializeObject<List<Column>>(apiResponse);
@@ -78,14 +81,17 @@ namespace RocketElevatorsCustomerPortal.Controllers
 
        public async Task<IActionResult> Elevators()
         {
-
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            Console.WriteLine(user);
+            List<Battery> BatteryList = new List<Battery>();
+            var email = user.UserName;
 
 
             List<Elevator> ElevatorList = new List<Elevator>();
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("https://domin-rest.azurewebsites.net/api/customers/claudie@cronin.name/elevators"))
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/{email}/elevators"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     ElevatorList = JsonConvert.DeserializeObject<List<Elevator>>(apiResponse);
