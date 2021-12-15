@@ -102,30 +102,10 @@ namespace RocketElevatorsCustomerPortal.Controllers
             return View(customer);
         }
 
-         [HttpPost]
-        public async Task<IActionResult> UpdateProfile(Customer customer)
-        {
-            Customer receivedCustomer = new Customer();
-            using (var httpClient = new HttpClient())
-            {
-                var content = new MultipartFormDataContent();
-                content.Add(new StringContent(customer.company_name), "company_name");
-                content.Add(new StringContent(customer.company_headquarters_address), "company_headquarters_address");
-                content.Add(new StringContent(customer.full_name_of_the_company_contact), "full_name_of_the_company_contact");
-                content.Add(new StringContent(customer.company_contact_phone), "company_contact_phone");
-                content.Add(new StringContent(customer.email_of_the_company_contact), "email_of_the_company_contact");
- 
-                using (var response = await httpClient.PutAsync("https://localhost:44324/api/Reservation", content))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    ViewBag.Result = "Success";
-                    receivedReservation = JsonConvert.DeserializeObject<Reservation>(apiResponse);
-                }
-            }
-            return View(receivedReservation);
-        }
-    }
-}
+         
+        
+    
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -134,3 +114,4 @@ namespace RocketElevatorsCustomerPortal.Controllers
         }
     }
 }
+
