@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.Net.Http;
 
 namespace RocketElevatorsCustomerPortal.Areas.Identity.Pages.Account
 {
@@ -70,7 +71,14 @@ namespace RocketElevatorsCustomerPortal.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            var email = Input.Email;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://rocketelevatorrestportal.azurewebsites.net/api/customers/{email}/columns"))
+                {
+                    if(response.IsSuccessStatusCode){
+                        Console.WriteLine("Successfully created the account");
+                        returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -101,14 +109,22 @@ namespace RocketElevatorsCustomerPortal.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+
+                // If we got this far, something failed, redisplay form
+                return Page();
+                    }else{
+                        ModelState.AddModelError("Error", "Something has gone wrong. Check your info again.");
+                        Console.WriteLine("Error occurred, status code is: {0}", response.StatusCode);
+                        return Page();
+                    }
                 }
             }
-
-            // If we got this far, something failed, redisplay form
-            return Page();
+            
         }
     }
 }
