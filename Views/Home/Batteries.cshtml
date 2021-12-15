@@ -1,8 +1,31 @@
-@{
-    ViewData["Title"] = "My Products";
-}
+@model IEnumerable<Battery>
+    @{ Layout = "_Layout"; }
 
-<div class="text-center">
-    <h1 class="display-4">My Batteries</h1>
-    
-</div>
+    <h2>All Batteries</h2>
+ 
+
+    <table class="table table-sm table-striped table-bordered m-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+       
+                <th>Status</th>
+                <th>Intervention Request</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+            <tr>
+                <td>@r.id</td>
+            
+                <td>@r.status.ToUpper()</td>
+                <td>
+                    <a asp-action="" asp-route-id="">
+                        <button type="button">New Request</button>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
