@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using RocketElevatorsCustomerPortal.Models;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace RocketElevatorsCustomerPortal.Controllers
 {
@@ -117,7 +118,27 @@ namespace RocketElevatorsCustomerPortal.Controllers
         }
 
          
-        
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(Customer customer)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
+            using (var httpClient = new HttpClient())
+            {
+                var request = new HttpRequestMessage
+                {
+
+                    RequestUri = new Uri("https://domin-rest.azurewebsites.net/api/customers/" + email),
+                    Method = new HttpMethod("Patch"),
+                    Content = new StringContent("[{ \"op\": \"replace\", \"path\": \"company_name\", \"value\": \"" + customer.company_name + "\"},{ \"op\": \"replace\", \"path\": \"company_headquarters_address\", \"value\": \"" + customer.company_headquarters_address + "\"},{ \"op\": \"replace\", \"path\": \"full_name_of_the_company_contact\", \"value\": \"" + customer.full_name_of_the_company_contact + "\"},{ \"op\": \"replace\", \"path\": \"company_contact_phone\", \"value\": \"" + customer.company_contact_phone + "\"},{ \"op\": \"replace\", \"path\": \"email_of_the_company_contact\", \"value\": \"" + customer.email_of_the_company_contact + "\"}]", Encoding.UTF8, "application/json")
+                };
+ 
+                var response = await httpClient.SendAsync(request);
+                ViewBag.Result = "Success";
+            }
+            return View(customer);
+        }
+    
     
 
 
