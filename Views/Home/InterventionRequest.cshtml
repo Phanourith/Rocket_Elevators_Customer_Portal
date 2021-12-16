@@ -1,8 +1,47 @@
-﻿@{
+﻿@model Intervention
+@using RocketElevatorsCustomerPortal.Models;
+@{
     ViewData["Title"] = "Intervention";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Intervention Request <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a></h2>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="building_id">Building ID: </label>
+        <select asp-for="building_id" class="form-control">
+            <option selected>Please Select The Building</option>
+            @foreach (Building building in ViewBag.Buildings)
+        {
+            <option value="@building.id">@building.id</option>
+        }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="battery_id">Battery ID: </label>
+        <select asp-for="battery_id" class="form-control">
+            <option selected>Please Select The Battery</option>
+            @foreach (Battery battery in ViewBag.Batteries)
+        {
+            <option value="@battery.id">@battery.id</option>
+        }
+        </select>
+    </div>
+    
+    
+    <div class="text-center panel-body form-group">
+        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+    </div>
+</form>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+       //Your code
+    });
+</script>
+
+
+

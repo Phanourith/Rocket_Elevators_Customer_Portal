@@ -33,8 +33,46 @@ namespace RocketElevatorsCustomerPortal.Controllers
         }
 
 
-        public IActionResult InterventionRequest()
+        public async Task<IActionResult> InterventionRequest()
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
+
+            List<Battery> BatteryList = new List<Battery>();
+            List<Building> BuildingList = new List<Building>();
+            List<Column> ColumnList = new List<Column>();
+            
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/{email}/buildings"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    BuildingList = JsonConvert.DeserializeObject<List<Building>>(apiResponse);
+                }
+            }
+
+            using (var httpClient = new HttpClient())
+            {
+            
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/{email}/batteries"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    BatteryList = JsonConvert.DeserializeObject<List<Battery>>(apiResponse);
+                }
+            }
+
+            using (var httpClient = new HttpClient())
+            {
+            
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/{email}/columns"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    ColumnList = JsonConvert.DeserializeObject<List<Column>>(apiResponse);
+                }
+            }
+            ViewBag.Buildings = BuildingList;
+            ViewBag.Batteries = BatteryList;
+   
             return View();
         }
 
@@ -60,7 +98,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
 
          
 
-
+        
 
         public async Task<IActionResult> Columns()
         {
@@ -104,6 +142,25 @@ namespace RocketElevatorsCustomerPortal.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> ElevatorIntervention(int id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
+
+            Intervention elevatorIntervention = new Intervention();
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/email={email}&elevator_id={id}"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    elevatorIntervention = JsonConvert.DeserializeObject<Intervention>(apiResponse);
+                }
+            }
+            return View(elevatorIntervention);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ColumnIntervention(int id)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var email = user.UserName;
