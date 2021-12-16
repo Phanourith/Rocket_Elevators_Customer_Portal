@@ -160,24 +160,94 @@ namespace RocketElevatorsCustomerPortal.Controllers
             }
             return View(elevatorIntervention);
         }
+         [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> BatteryIntervention(int id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
 
+            Intervention batteryIntervention = new Intervention();
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/email={email}&battery_id={id}"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    batteryIntervention = JsonConvert.DeserializeObject<Intervention>(apiResponse);
+                }
+            }
+            return View(batteryIntervention);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> BatteryIntervention(Intervention intervention)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
+           
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri("https://domin-rest.azurewebsites.net/api/interventions/"),
+                    Method = new HttpMethod("Post"),
+                    Content = new StringContent("{\"author\": \"" + intervention.author + "\", \"building_id\": \"" + intervention.building_id + "\", \"battery_id\": \"" + intervention.battery_id + "\", \"customer_id\": \"" + intervention.author + "\", \"report\": \"" + intervention.report + "\" }", Encoding.UTF8, "application/json")
+                };
+ 
+                var response = await httpClient.SendAsync(request);
+                
+                ViewBag.Result = "Success";
+            }
+
+            return View(intervention);
+        }
+
+
+
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> ColumnIntervention(int id)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var email = user.UserName;
 
-            Intervention elevatorIntervention = new Intervention();
+            Intervention columnIntervention = new Intervention();
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/email={email}&elevator_id={id}"))
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/email={email}&column_id={id}"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    elevatorIntervention = JsonConvert.DeserializeObject<Intervention>(apiResponse);
+                    columnIntervention = JsonConvert.DeserializeObject<Intervention>(apiResponse);
                 }
             }
-            return View(elevatorIntervention);
+            return View(columnIntervention);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ColumnIntervention(Intervention intervention)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
+           
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri("https://domin-rest.azurewebsites.net/api/interventions/"),
+                    Method = new HttpMethod("Post"),
+                    Content = new StringContent("{\"author\": \"" + intervention.author + "\", \"building_id\": \"" + intervention.building_id + "\", \"battery_id\": \"" + intervention.battery_id + "\", \"column_id\": \"" + intervention.column_id + "\", \"customer_id\": \"" + intervention.author + "\", \"report\": \"" + intervention.report + "\" }", Encoding.UTF8, "application/json")
+                };
+ 
+                var response = await httpClient.SendAsync(request);
+                
+                ViewBag.Result = "Success";
+            }
+
+            return View(intervention);
         }
 
         [Authorize]
