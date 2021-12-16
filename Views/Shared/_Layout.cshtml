@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 
-<body>
+<body onload="myFunction()">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -41,7 +41,7 @@
                                         <a class="dropdown-item" asp-controller="Home" asp-action="Batteries">My
                                             Batteries</a>
                                         <a class="dropdown-item" asp-controller="Home" asp-action="Columns">My Columns</a>
-                                        <a class="dropdown-item" asp-controller="Home" asp-action="Elevators">My
+                                        <a class="dropdown-item" id="logged-in" asp-controller="Home" asp-action="Elevators">My
                                             Elevators</a>
 
                                     </div>
@@ -66,6 +66,9 @@
         </main>
     </div>
 
+    
+
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - RocketElevatorsCustomerPortal - <a asp-area="" asp-controller="Home"
@@ -77,6 +80,16 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script src="//code.tidio.co/6bfr85jugh8bo0croxrnh5ehdad0kits.js" async></script>
+    <script>
+        function myFunction(){
+            var element =  document.getElementById('logged-in');
+            if (typeof(element) != 'undefined' && element != null)
+            {
+                tidioChatApi.track("Logged In");
+            }
+            
+        }
+    </script>
 </body>
 
 </html>
