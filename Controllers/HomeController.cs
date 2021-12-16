@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using RocketElevatorsCustomerPortal.Models;
 using Newtonsoft.Json;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RocketElevatorsCustomerPortal.Controllers
 {
@@ -32,7 +33,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
             return View();
         }
 
-
+        [Authorize]
         public async Task<IActionResult> InterventionRequest()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -75,7 +76,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
    
             return View();
         }
-
+        [Authorize]
         public async Task<IActionResult> Batteries()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -98,8 +99,8 @@ namespace RocketElevatorsCustomerPortal.Controllers
 
          
 
-        
 
+        [Authorize]
         public async Task<IActionResult> Columns()
         {
 
@@ -121,7 +122,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
             return View(ColumnList);
         }
 
-
+        [Authorize]
        public async Task<IActionResult> Elevators()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -140,6 +141,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
             }
             return View(ElevatorList);
         }
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> ElevatorIntervention(int id)
         {
@@ -178,6 +180,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
             return View(elevatorIntervention);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ElevatorIntervention(Intervention intervention)
         {
@@ -200,7 +203,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
 
             return View(intervention);
         }
-
+        [Authorize]
         public async Task<IActionResult> UpdateProfile()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -217,7 +220,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
             return View(customer);
         }
 
-         
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> UpdateProfile(Customer customer)
         {
