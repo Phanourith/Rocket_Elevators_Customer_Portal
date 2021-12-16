@@ -58,6 +58,10 @@ namespace RocketElevatorsCustomerPortal.Controllers
             return View(BatteryList);
         }
 
+         
+
+
+
         public async Task<IActionResult> Columns()
         {
 
@@ -83,8 +87,6 @@ namespace RocketElevatorsCustomerPortal.Controllers
        public async Task<IActionResult> Elevators()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-           
-            List<Battery> BatteryList = new List<Battery>();
             var email = user.UserName;
 
 
@@ -99,6 +101,47 @@ namespace RocketElevatorsCustomerPortal.Controllers
                 }
             }
             return View(ElevatorList);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ElevatorIntervention(int id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
+
+            Intervention elevatorIntervention = new Intervention();
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/email={email}&elevator_id={id}"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    elevatorIntervention = JsonConvert.DeserializeObject<Intervention>(apiResponse);
+                }
+            }
+            return View(elevatorIntervention);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ElevatorIntervention(Intervention intervention)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
+           
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri("https://domin-rest.azurewebsites.net/api/interventions/"),
+                    Method = new HttpMethod("Post"),
+                    Content = new StringContent("{\"author\": \"" + intervention.author + "\", \"building_id\": \"" + intervention.building_id + "\", \"battery_id\": \"" + intervention.battery_id + "\", \"column_id\": \"" + intervention.column_id + "\", \"elevator_id\": \"" + intervention.elevator_id + "\",\"customer_id\": \"" + intervention.author + "\", \"report\": \"" + intervention.report + "\" }", Encoding.UTF8, "application/json")
+                };
+ 
+                var response = await httpClient.SendAsync(request);
+                
+                ViewBag.Result = "Success";
+            }
+
+            return View(intervention);
         }
 
         public async Task<IActionResult> UpdateProfile()
@@ -123,7 +166,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var email = user.UserName;
-            using (var httpClient = new HttpClient())
+            using (HttpClient httpClient = new HttpClient())
             {
                 var request = new HttpRequestMessage
                 {
