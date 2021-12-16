@@ -1,0 +1,37 @@
+@model Intervention
+    @{ Layout = "_Layout"; }
+
+    <h2>New Intervention Request <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a></h2>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="author">Author ID</label>
+        <input class="form-control" asp-for="author" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="building_id">Building ID</label>
+        <input class="form-control" asp-for="building_id" readonly/>
+    </div>
+    <div class="form-group">
+        <label asp-for="battery_id">Battery ID</label>
+        <input class="form-control" asp-for="battery_id" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="column_id">Column ID</label>
+        <input class="form-control" asp-for="column_id" readonly/>
+    </div>
+      <div class="form-group">
+        <label asp-for="report">Description</label>
+        <input class="form-control" asp-for="report" />
+    </div>
+    <div class="text-center panel-body">
+        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+    </div>
+</form>
+
+@if (ViewBag.Result == "Success")
+{
+    <br>
+    <div class="alert alert-danger" role="alert">
+        Submitted Successfully
+    </div>
+}

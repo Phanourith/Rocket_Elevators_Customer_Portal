@@ -21,7 +21,7 @@
                 <td>@r.column_type</td>
                 <td>@r.status.ToUpper()</td>
                 <td>
-                    <a asp-action="" asp-route-id="">
+                    <a asp-controller="Home" asp-action="ColumnIntervention" asp-route-id="@r.id">
                         <button type="button">New Request</button>
                     </a>
                 </td>
