@@ -42,6 +42,21 @@ namespace RocketElevatorsCustomerPortal.Controllers
             List<Battery> BatteryList = new List<Battery>();
             List<Building> BuildingList = new List<Building>();
             List<Column> ColumnList = new List<Column>();
+            List<Elevator> ElevatorList = new List<Elevator>();
+            
+            Customer customer = new Customer();
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/{email}/info"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    customer = JsonConvert.DeserializeObject<Customer>(apiResponse);
+                }
+            }
+
+
+
             
             using (var httpClient = new HttpClient())
             {
@@ -71,11 +86,62 @@ namespace RocketElevatorsCustomerPortal.Controllers
                     ColumnList = JsonConvert.DeserializeObject<List<Column>>(apiResponse);
                 }
             }
+
+            using (var httpClient = new HttpClient())
+            {
+            
+                using (var response = await httpClient.GetAsync($"https://domin-rest.azurewebsites.net/api/customers/{email}/elevators"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    ElevatorList = JsonConvert.DeserializeObject<List<Elevator>>(apiResponse);
+                }
+            }
+
+           
             ViewBag.Buildings = BuildingList;
             ViewBag.Batteries = BatteryList;
+            ViewBag.Columns = ColumnList;
+            ViewBag.Elevators = ElevatorList;
+            ViewBag.author_id = customer.id;
+
    
             return View();
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> InterventionRequest(Intervention intervention)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.UserName;
+           
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri("https://domin-rest.azurewebsites.net/api/interventions/"),
+                    Method = new HttpMethod("Post"),
+                    Content = new StringContent("{\"author\": \"" + intervention.author + "\", \"building_id\": \"" + intervention.building_id + "\", \"battery_id\": \"" + intervention.battery_id + "\", \"column_id\": \"" + intervention.column_id + "\", \"elevator_id\": \"" + intervention.elevator_id + "\",\"customer_id\": \"" + intervention.author + "\", \"report\": \"" + intervention.report + "\" }", Encoding.UTF8, "application/json")
+                };
+
+
+ 
+                var response = await httpClient.SendAsync(request);
+
+            
+
+                
+                ViewBag.Result = "Success";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
+       
+
+
+
         [Authorize]
         public async Task<IActionResult> Batteries()
         {
@@ -160,7 +226,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
             }
             return View(elevatorIntervention);
         }
-         [Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> BatteryIntervention(int id)
         {
@@ -195,8 +261,12 @@ namespace RocketElevatorsCustomerPortal.Controllers
                     Method = new HttpMethod("Post"),
                     Content = new StringContent("{\"author\": \"" + intervention.author + "\", \"building_id\": \"" + intervention.building_id + "\", \"battery_id\": \"" + intervention.battery_id + "\", \"customer_id\": \"" + intervention.author + "\", \"report\": \"" + intervention.report + "\" }", Encoding.UTF8, "application/json")
                 };
- 
+                
                 var response = await httpClient.SendAsync(request);
+               
+ 
+                
+               
                 
                 ViewBag.Result = "Success";
             }
@@ -239,7 +309,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
                 {
                     RequestUri = new Uri("https://domin-rest.azurewebsites.net/api/interventions/"),
                     Method = new HttpMethod("Post"),
-                    Content = new StringContent("{\"author\": \"" + intervention.author + "\", \"building_id\": \"" + intervention.building_id + "\", \"battery_id\": \"" + intervention.battery_id + "\", \"column_id\": \"" + intervention.column_id + "\", \"customer_id\": \"" + intervention.author + "\", \"report\": \"" + intervention.report + "\" }", Encoding.UTF8, "application/json")
+                    Content = new StringContent("{\"author\": \"" + intervention.author + "\", \"building_id\": \"" + intervention.building_id + "\", \"battery_id\": \"" + intervention.battery_id + "\", \"column_id\": \"" + intervention.column_id + "\", \"customer_id\": \"" + intervention.author + "\", \"report\": \"" + intervention.report + "\"}", Encoding.UTF8, "application/json")
                 };
  
                 var response = await httpClient.SendAsync(request);

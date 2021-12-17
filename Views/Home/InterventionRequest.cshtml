@@ -2,45 +2,219 @@
 @using RocketElevatorsCustomerPortal.Models;
 @{
     ViewData["Title"] = "Intervention";
+    List<Battery> batteries = ViewBag.Batteries;
+    List<Building> buildings = ViewBag.Buildings;
+    List<Column> columns = ViewBag.Columns;
+    List<Elevator> elevators = ViewBag.Elevators;
+        
+
 }
+
 
 <h2>Intervention Request <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a></h2>
 <form method="post">
+
     <div class="form-group">
+        <label asp-for="author">Author ID</label>
+        <input class="form-control" asp-for="author" value="@ViewBag.author_id" readonly />
+    </div>
+
+    <div class="form-group buildings-field">
         <label asp-for="building_id">Building ID: </label>
-        <select asp-for="building_id" class="form-control">
-            <option selected>Please Select The Building</option>
-            @foreach (Building building in ViewBag.Buildings)
+        <select asp-for="building_id" class="form-control buildings-select" required>
+            <option value="" selected>Select</option>
+            @foreach (Building building in buildings)
         {
             <option value="@building.id">@building.id</option>
         }
         </select>
     </div>
 
-    <div class="form-group">
+    <div class="form-group batteries-field">
         <label asp-for="battery_id">Battery ID: </label>
-        <select asp-for="battery_id" class="form-control">
-            <option selected>Please Select The Battery</option>
-            @foreach (Battery battery in ViewBag.Batteries)
+        <select asp-for="battery_id" class="form-control batteries-select" required>
+            <option value="" selected>Select</option>
+            @foreach (Battery battery in batteries)
         {
             <option value="@battery.id">@battery.id</option>
         }
         </select>
+    </div>
+
+    <div class="form-group columns-field">
+        <label asp-for="column_id">Column ID: </label>
+        <select asp-for="column_id" class="form-control columns-select">
+            <option value="" selected>Select</option>
+            @foreach (Column column in columns)
+        {
+            <option value="@column.id">@column.id</option>
+        }
+        </select>
+    </div>
+
+    <div class="form-group elevators-field">
+        <label asp-for="elevator_id">Elevator ID: </label>
+        <select asp-for="elevator_id" class="form-control elevators-select">
+            <option value="" selected>Select</option>
+            @foreach (Elevator elevator in elevators)
+        {
+            <option value="@elevator.id">@elevator.id</option>
+        }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="report">Description: </label>
+        <input class="form-control" asp-for="report" />
     </div>
     
     
     <div class="text-center panel-body form-group">
         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
     </div>
+
+    
 </form>
+
+@if (ViewBag.Result == "Success")
+{
+    <br>
+    <div class="alert alert-danger" role="alert">
+        Submitted Successfully
+    </div>
+}
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
-    $(function () {
-       //Your code
-    });
+    $(document).ready(function () {
+
+    $('.batteries-field').hide();
+    $('.columns-field').hide();
+    $('.elevators-field').hide();
+
+
+    $(".buildings-select").change(function () {
+            $('.batteries-field').hide();
+            $('.columns-field').hide();
+            $('.elevators-field').hide();
+            var building_id = $(this).val();
+
+            $.ajax({
+                dataType: "json",
+                cache: false,
+                url: 'https://domin-rest.azurewebsites.net/api/batteries/building_id=' + building_id,
+                timeout: 5000,
+                error: function (XMLHttpRequest, errorTextStatus, error) {
+                    alert("Failed to submit : " + errorTextStatus + " ;" + error);
+                },
+                success: function (data) {
+
+                    // Clear all options from course select
+                    $("select.batteries-select option").remove();
+                    //put in a empty default line
+                    var row = "<option value=\"" + "" + "\">" + "Required" + "</option>";
+                    $(row).appendTo("select.batteries-select");
+                    // Fill course select
+                    $.each(data, function (i, j) {
+
+                        row = "<option value=\"" + j.id + "\">" + j.id + " - " + j.status + "</option>";
+                        $(row).appendTo("select.batteries-select");
+                    })
+                }
+            });
+            $('.batteries-field').show();
+            
+    })
+
+    $(".batteries-select").change(function () {
+        $('.columns-field').hide();
+        $('.elevators-field').hide();
+
+        if ($(".batteries-select").val() === "") {
+            $('.columns-field').hide();
+            $("select.columns-select option").remove();
+            var row = "<option value=\"" + "" + "\">" + "Select" + "</option>";
+            $(row).appendTo("select.columns-select");
+        } else {
+
+            $('.columns-field').show();
+            var battery_id = $(this).val();
+
+            $.ajax({
+                dataType: "json",
+                cache: false,
+                url: 'https://domin-rest.azurewebsites.net/api/columns/battery_id=' + battery_id,
+                timeout: 5000,
+                error: function (XMLHttpRequest, errorTextStatus, error) {
+                    alert("Failed to submit : " + errorTextStatus + " ;" + error);
+                },
+                success: function (data) {
+
+                    // Clear all options from course select
+                    $("select.columns-select option").remove();
+                    //put in a empty default line
+                    var row = "<option value=\"" + "" + "\">" + "None" + "</option>";
+                    $(row).appendTo("select.columns-select");
+                    // Fill course select
+                    $.each(data, function (i, j) {
+
+                        row = "<option value=\"" + j.id + "\">" + j.id + " - " + j.status + "</option>";
+                        $(row).appendTo("select.columns-select");
+                    })
+                }
+            });
+        }
+    })
+
+
+    $(".columns-select").change(function () {
+
+        if ($(".columns-select").val() === "") {
+           
+            $('.elevators-field').hide();
+            $("select.elevators-select option").remove();
+            var row = "<option value=\"" + "" + "\">" + "Select" + "</option>";
+            $(row).appendTo("select.elevators-select");
+        } else {
+            
+            $('.elevators-field').show();
+            var column_id = $(this).val();
+
+            $.ajax({
+                dataType: "json",
+                cache: false,
+                url: 'https://domin-rest.azurewebsites.net/api/elevators/column_id=' + column_id,
+                timeout: 5000,
+                error: function (XMLHttpRequest, errorTextStatus, error) {
+                    alert("Failed to submit : " + errorTextStatus + " ;" + error);
+                },
+                success: function (data) {
+
+                    // Clear all options from course select
+                    $("select.elevators-select option").remove();
+                    //put in a empty default line
+                    var row = "<option value=\"" + "" + "\">" + "None" + "</option>";
+                    $(row).appendTo("select.elevators-select");
+                    // Fill course select
+                    $.each(data, function (i, j) {
+
+                        row = "<option value=\"" + j.id + "\">" + j.id + " - " + j.status + "</option>";
+                        $(row).appendTo("select.elevators-select");
+                    })
+                }
+            });
+        }
+    })
+
+
+
+
+
+    })
+
+
 </script>
 
 
