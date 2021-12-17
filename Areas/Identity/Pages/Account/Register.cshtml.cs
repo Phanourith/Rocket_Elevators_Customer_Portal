@@ -74,7 +74,7 @@ namespace RocketElevatorsCustomerPortal.Areas.Identity.Pages.Account
             var email = Input.Email;
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync($"https://rocketelevatorrestportal.azurewebsites.net/api/customers/{email}/columns"))
+                using (var response = await httpClient.GetAsync($"https://rocketelevatorrestportal.azurewebsites.net/api/customers/{email}/check"))
                 {
                     if(response.IsSuccessStatusCode){
                         Console.WriteLine("Successfully created the account");
