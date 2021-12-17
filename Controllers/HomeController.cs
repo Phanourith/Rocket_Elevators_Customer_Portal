@@ -128,13 +128,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
  
                 var response = await httpClient.SendAsync(request);
 
-                Console.WriteLine(response);
-                Console.WriteLine(intervention.author);
-                Console.WriteLine(intervention.building_id);
-                Console.WriteLine(intervention.column_id);
-                Console.WriteLine(intervention.elevator_id);
-                Console.WriteLine(intervention.report);
-                Console.WriteLine("========================================");
+            
 
                 
                 ViewBag.Result = "Success";
@@ -272,7 +266,7 @@ namespace RocketElevatorsCustomerPortal.Controllers
                
  
                 
-                Console.WriteLine(response);
+               
                 
                 ViewBag.Result = "Success";
             }
