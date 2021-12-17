@@ -28,7 +28,7 @@ namespace RocketElevatorsCustomerPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString =  Configuration.GetConnectionString("server=codeboxx.cq6zrczewpu2.us-east-1.rds.amazonaws.com;userid=codeboxx;password=Codeboxx1!;database=LongNguyenAccount;port=3306");
+            var connectionString =  "server=codeboxx.cq6zrczewpu2.us-east-1.rds.amazonaws.com;userid=codeboxx;password=Codeboxx1!;database=LongNguyenAccount;port=3306";
             var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(connectionString, serverVersion)
